@@ -2,12 +2,13 @@
   <div class="hero">
     <swiper-container navigation="true" :slides-per-view="1" :space-between="50" :pagination="{ clickable: true }">
       <swiper-slide class="hero__slider" v-for="(item, i) in items" :key="`sauce__${i}`">
-        <div class="left">
+        <div class="hero__description">
           <span>Trends Stock!</span>
-          <h1>Short top keep you pretty</h1>
-          <button>Shop now</button>
+          <h1 class="hero__title--top">Short top</h1>
+          <h1 class="hero__title--bottom">keep you pretty</h1>
+          <button class="hero__button">Shop now</button>
         </div>
-        <div class="right"></div>
+        <HeroItem title="Solid Color Sleeves" :price="100" :oldPrice="130" />
         <img class="hero__banner" src="@/assets/images/banner.png" alt="banner">
 
       </swiper-slide>
@@ -27,8 +28,37 @@ const items = [
 </script>
 
 <style scoped lang="scss">
+h1 {
+  text-transform: uppercase;
+}
+
 .hero {
 
-  &__slider {}
+  padding: 0 4rem;
+  box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+  &__slider {
+    position: relative;
+    padding: 0 4rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    &--top {
+      font-weight: 500;
+    }
+
+    &--bottom {
+      font-weight: 600;
+    }
+  }
+
+  &__button {
+    padding: 1rem 2rem;
+    background-color: #073046;
+    color: #fff;
+    text-transform: uppercase;
+  }
 }
 </style>
