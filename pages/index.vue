@@ -7,6 +7,10 @@
     <Promocode />
     <Partners />
     <Review />
+    <Blog />
+    <Policy />
+    <Instagram />
+    <Footer />
   </div>
 </template>
 

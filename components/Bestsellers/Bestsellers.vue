@@ -36,6 +36,7 @@ const items = [
   gap: 6rem;
   padding: 10rem 4rem;
   min-height: 854px;
+  height: 100vh;
 
   &__text {
     max-width: 542px;
