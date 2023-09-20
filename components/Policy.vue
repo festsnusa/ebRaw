@@ -1,14 +1,20 @@
 <template>
   <div class="policy">
     <div class="policy__card" v-for="(card, i) in cards" :key="`policy__${i}`">
-      <img class="policy__image" :src="`/_nuxt/assets/images/policy/${card.img}.svg`" alt="icon">
+      <img class="policy__image" :src="images[card.img]" alt="icon">
       <p class="policy__title">{{ card.title }}</p>
       <p class="policy__subtitle">{{ card.subtitle }}</p>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { filename } from 'pathe/utils';
+const glob = import.meta.glob('~/assets/images/policy/*.svg', { eager: true });
+const images = Object.fromEntries(
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
+);
+
 const cards = [
   { "title": "Free Shipping", "subtitle": "Orders over $200", "img": "1" },
   { "title": "Secure Payment", "subtitle": "100% secure payment", "img": "2" },

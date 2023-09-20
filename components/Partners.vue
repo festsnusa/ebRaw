@@ -8,14 +8,20 @@
     <swiper-container class="swiper" navigation="true" :slides-per-view="6" :space-between="10"
       :pagination="{ clickable: true }">
       <swiper-slide class="partners__slider" v-for="(item, i) in items" :key="`partners__${i}`">
-        <img :src="`/_nuxt/assets/images/brands/${item}.png`" alt="partner">
+        <img :src="images[item]" alt="partner">
       </swiper-slide>
     </swiper-container>
 
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { filename } from 'pathe/utils';
+const glob = import.meta.glob('~/assets/images/brands/*.png', { eager: true });
+const images = Object.fromEntries(
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
+);
+
 const items = [
   1, 2, 3, 4, 5, 6, 1, 3
 ]

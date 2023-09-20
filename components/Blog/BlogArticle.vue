@@ -2,7 +2,7 @@
   <div class="posts">
     <div class="post" v-for="(post, i) in posts" :key="`post__${i}`">
       <span class="post__tag">{{ post.tag }}</span>
-      <img class="post__image" :src="`/_nuxt/assets/images/blog/${post.img}.png`" alt="background">
+      <img class="post__image" :src="images[post.img]" alt="background">
       <div class="post__content">
         <span class="post__date">Design July 11, 2021</span>
         <p class="post__title">{{ post.title }}</p>
@@ -15,7 +15,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { filename } from 'pathe/utils';
+const glob = import.meta.glob('~/assets/images/blog/*.png', { eager: true });
+const images = Object.fromEntries(
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
+);
+
 const posts = [
   { "title": "2021’S Biggest Sneaker Is Getting Us So Pumped For Summer", "subtitle": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.", "tag": "Sale", "img": 1 },
   { "title": "2021’S Biggest Sneaker Is Getting Us So Pumped For Summer", "subtitle": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.", "tag": "Fashion", "img": 2 }

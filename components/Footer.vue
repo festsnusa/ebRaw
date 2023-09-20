@@ -9,7 +9,7 @@
         <ul class="footer__links">
           <li class="footer__link" v-for="(social, i) in socials" :key="`socials__${i}`">
             <NuxtLink :to="social.link" target="_blank">
-              <img :src="`/_nuxt/assets/images/socials/${social.title}.svg`" :alt="social.title">
+              <img :src="socialsImages[social.title]" :alt="social.title">
             </NuxtLink>
           </li>
         </ul>
@@ -44,14 +44,16 @@
       </p>
       <ul>
         <li v-for="(payment, i) in payments" :key="`payment__${i}`">
-          <img :src="`/_nuxt/assets/images/payment/${payment}.png`" :alt="payment">
+          <img :src="paymentImages[payment]" :alt="payment">
         </li>
       </ul>
     </section>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { filename } from 'pathe/utils';
+
 const navItems = [
   { "title": "Support Links", "items": ["Product", "Guides", "Terms & Conditions", "Delivery", "Policy Privacy", "Policy Feedback"] },
   { "title": "Quick Links", "items": ["Product", "Guides", "Terms & Conditions", "Delivery", "Policy Privacy", "Policy Feedback"] },
@@ -70,6 +72,17 @@ const payments = ["paypal", "skrill", "visa", "mastercard", "americanexpress"]
 const onSubmit = () => {
 
 }
+
+// image proceeding
+const socialsGlob = import.meta.glob('~/assets/images/socials/*.svg', { eager: true });
+const paymentGlob = import.meta.glob('~/assets/images/payment/*.png', { eager: true });
+const socialsImages = Object.fromEntries(
+  Object.entries(socialsGlob).map(([key, value]) => [filename(key), value.default])
+);
+
+const paymentImages = Object.fromEntries(
+  Object.entries(paymentGlob).map(([key, value]) => [filename(key), value.default])
+);
 </script>
 
 <style scoped lang="scss">

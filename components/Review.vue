@@ -9,7 +9,7 @@
           <p class="review__snippet">{{ item.snippet }}</p>
           <p class="review__text">{{ item.text }}</p>
           <div class="review__hero">
-            <img :src="`/_nuxt/assets/images/${item.avatar}.png`" alt="avatar">
+            <img :src="images[item.avatar]" alt="avatar">
             <span>{{ item.name }}</span>
             <span>{{ item.position }}</span>
           </div>
@@ -20,7 +20,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { filename } from 'pathe/utils';
+const glob = import.meta.glob('~/assets/images/*.png', { eager: true });
+const images = Object.fromEntries(
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
+);
+
 const items = [
   { "snippet": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour", "text": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.", "avatar": "avatar-wade", "name": "Wade Warren", "position": "UI designer" },
   { "snippet": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour", "text": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.", "avatar": "avatar-wade", "name": "Wade Warren", "position": "UI designer" },

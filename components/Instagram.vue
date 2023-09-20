@@ -6,16 +6,21 @@
     </div>
     <div class="instagram__carousel">
       <div class="instagram__item" v-for="index in 4" :key="`item__${index}`">
-        <img class="instagram__image" :src="`/_nuxt/assets/images/instagram/${index}.png`" alt="item">
+        <img class="instagram__image" :src="images[index]" alt="item">
         <div class="instagram__overlay">
-          <img class="instagram__plus" src="../assets/images/instagram/plus.svg" alt="plus">
+          <img class="instagram__plus" src="@/assets/images/instagram/plus.svg" alt="plus">
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { filename } from 'pathe/utils';
+const glob = import.meta.glob('~/assets/images/instagram/*.png', { eager: true });
+const images = Object.fromEntries(
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
+);
 </script>
 
 <style scoped lang="scss">

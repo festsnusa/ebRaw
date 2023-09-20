@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <img :src="`/_nuxt/assets/images/products/${item.image}.png`" alt="product">
+    <img :src="images[item.image]" alt="product">
     <span class="product__title">{{ item.title }}</span>
     <span class="product__price">${{ item.price }}</span>
     <div class="product__footer" v-show="isVisible">
@@ -25,7 +25,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { filename } from 'pathe/utils';
 const isVisible = ref(false)
 
 const props = defineProps({
@@ -34,6 +35,11 @@ const props = defineProps({
     required: true,
   }
 })
+
+const glob = import.meta.glob('~/assets/images/products/*.png', { eager: true });
+const images = Object.fromEntries(
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
+);
 </script>
 
 <style scoped lang="scss">
