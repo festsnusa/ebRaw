@@ -35,7 +35,8 @@
   &__content {
     display: flex;
     justify-content: space-between;
-    gap: 20rem;
+    width: 100%;
+    gap: 10rem;
   }
 }
 </style>

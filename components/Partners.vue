@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 const items = [
-  1, 2, 3, 4, 5, 6, 1, 3, 4, 5, 2, 3
+  1, 2, 3, 4, 5, 6, 1, 3
 ]
 </script>
 
@@ -32,7 +32,6 @@ const items = [
   flex-direction: column;
   align-items: center;
 
-
   &__text {
     display: flex;
     flex-direction: column;
@@ -42,6 +41,10 @@ const items = [
     p {
       max-width: 570px;
     }
+  }
+
+  &__slider {
+    padding: 5rem 4rem;
   }
 }
 </style>

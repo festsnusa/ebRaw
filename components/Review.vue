@@ -1,14 +1,22 @@
 <template>
   <div class="review">
-    <h1 class="review__title">What Say Our Regular Customer</h1>
-    <swiper-container class="swiper" navigation="true" :slides-per-view="1" :space-between="10"
-      :pagination="{ clickable: true }">
-      <swiper-slide class="review__slider" v-for="(item, i) in items" :key="`review__${i}`">
-        <p class="review__snippet">{{ item.snippet }}</p>
-        <p class="review__text">{{ item.text }}</p>
-        <img :src="`/_nuxt/assets/images/${item.avatar}.png`" alt="avatar">
-      </swiper-slide>
-    </swiper-container>
+    <div class="review__overlay"></div>
+    <div class="review__content">
+      <h1 class="review__title">What Say Our Regular Customer</h1>
+      <swiper-container class="swiper" navigation="true" :slides-per-view="1" :space-between="10"
+        :pagination="{ clickable: true }">
+        <swiper-slide class="review__slider" v-for="(item, i) in items" :key="`review__${i}`">
+          <p class="review__snippet">{{ item.snippet }}</p>
+          <p class="review__text">{{ item.text }}</p>
+          <div class="review__hero">
+            <img :src="`/_nuxt/assets/images/${item.avatar}.png`" alt="avatar">
+            <span>{{ item.name }}</span>
+            <span>{{ item.position }}</span>
+          </div>
+
+        </swiper-slide>
+      </swiper-container>
+    </div>
   </div>
 </template>
 
@@ -22,20 +30,44 @@ const items = [
 
 <style scoped lang="scss">
 .review {
+  padding: 7rem;
   text-align: center;
+  position: relative;
+  background-image: url('@/assets/images/review-background.png');
+  background-size: cover;
+  color: #fff;
 
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('@/assets/images/overlay.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.75;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 
   &__slider {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    padding: 4rem;
   }
 
   &__title {
     font-weight: 600;
     font-size: 30px;
     line-height: 43.35px;
+    color: #fff;
   }
 
   &__snippet {
@@ -50,9 +82,14 @@ const items = [
     font-weight: 400;
     max-width: 570px;
   }
-}
 
-// .swiper {
-//   display: contents;
-// }
+  &__hero {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      padding: 1rem;
+    }
+  }
+}
 </style>

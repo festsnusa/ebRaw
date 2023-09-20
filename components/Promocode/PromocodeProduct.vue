@@ -26,12 +26,15 @@ const items = [
 <style scoped lang="scss">
 .product {
 
-  position: relative;
-  z-index: 5;
+  max-width: 470px;
 
   &__slider {
     background-color: #fff;
-    // position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
   }
 
   &__stars {
